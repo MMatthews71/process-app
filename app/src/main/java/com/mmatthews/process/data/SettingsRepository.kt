@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.mmatthews.process.domain.AppSettings
-import com.mmatthews.process.domain.CrisisLine
 import com.mmatthews.process.domain.Defaults
 import com.mmatthews.process.domain.ProcessDraft
 import com.mmatthews.process.domain.ReframeType
@@ -33,7 +32,6 @@ class SettingsRepository @Inject constructor(private val store: DataStore<Prefer
         val FEELINGS = stringPreferencesKey("feelings_json")
         val CUSTOM_CHIPS = stringPreferencesKey("custom_chips_json")
         val HELPERS = stringPreferencesKey("helpers_json")
-        val CRISIS = stringPreferencesKey("crisis_lines_json")
         val LAST_TAB = stringPreferencesKey("last_reframe_tab")
         val WORRY_SLOT = booleanPreferencesKey("worry_slot_enabled")
         val LAST_HELPER = stringPreferencesKey("last_helper")
@@ -51,7 +49,6 @@ class SettingsRepository @Inject constructor(private val store: DataStore<Prefer
             feelings = decode<Map<String, List<String>>>(p[Keys.FEELINGS]) ?: Defaults.feelings,
             customChips = decode<List<String>>(p[Keys.CUSTOM_CHIPS]) ?: emptyList(),
             helpers = decode<List<String>>(p[Keys.HELPERS]) ?: Defaults.helpers,
-            crisisLines = decode<List<CrisisLine>>(p[Keys.CRISIS]) ?: Defaults.crisisLines,
             lastReframeTab = p[Keys.LAST_TAB]
                 ?.let { runCatching { ReframeType.valueOf(it) }.getOrNull() }
                 ?.takeIf { it != ReframeType.NONE } ?: ReframeType.TRUER,

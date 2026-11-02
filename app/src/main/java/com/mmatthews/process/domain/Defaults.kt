@@ -28,8 +28,4 @@ object Defaults {
         "Step into sunlight",
         "Stretch 2 min",
     )
-
-    val crisisLines: List<CrisisLine> = listOf(
-        CrisisLine("Canada", "988"),
-    )
 }

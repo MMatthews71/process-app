@@ -1,7 +1,5 @@
 package com.mmatthews.process.domain
 
-import kotlinx.serialization.Serializable
-
 enum class EntryType { PROCESS, NOTICE, GOOD }
 
 enum class ReframeType { TRUER, FRIEND, NONE }
@@ -17,9 +15,6 @@ enum class PredictionOutcome(val label: String) {
 
 enum class ScoreType { SOCIAL_ANXIETY, PHQ9 }
 
-@Serializable
-data class CrisisLine(val label: String, val number: String)
-
 /** Everything the UI needs from DataStore, as plain values. */
 data class AppSettings(
     val onboarded: Boolean = false,
@@ -27,7 +22,6 @@ data class AppSettings(
     val feelings: Map<String, List<String>> = Defaults.feelings,
     val customChips: List<String> = emptyList(),
     val helpers: List<String> = Defaults.helpers,
-    val crisisLines: List<CrisisLine> = Defaults.crisisLines,
     val lastReframeTab: ReframeType = ReframeType.TRUER,
     val worrySlotEnabled: Boolean = false,
     val lastHelper: String? = null,

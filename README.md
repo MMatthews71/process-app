@@ -14,7 +14,7 @@ Name the feeling, settle the body, check the story, pick one next step, then get
 | Step | What | State |
 |---|---|---|
 | 1 | Core PROCESS flow + Room | **done, ready to test on the phone** |
-| 2 | Quick notice + guardrails (recurrence, repeat groups, crisis card, heavy use, 24 h read-only) | next |
+| 2 | Quick notice + guardrails (recurrence, repeat groups, heavy use, 24 h read-only) | next |
 | 3 | Morning check and reminders | |
 | 4 | Lessons, Therapy list, week card | |
 | 5 | Obsidian export | |
