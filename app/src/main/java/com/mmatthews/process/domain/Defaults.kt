@@ -24,14 +24,12 @@ object Defaults {
     )
 
     val helpers: List<String> = listOf(
-        "Walk 5 min without music",
         "Call family",
         "Step into sunlight",
         "Stretch 2 min",
     )
 
     val crisisLines: List<CrisisLine> = listOf(
-        CrisisLine("Lifeline", "13 11 14"),
         CrisisLine("Canada", "988"),
     )
 }

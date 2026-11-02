@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mmatthews.process.domain.Flow
 import com.mmatthews.process.domain.ProcessDraft
-import com.mmatthews.process.ui.components.CrisisFooter
 import com.mmatthews.process.ui.components.FlowScaffold
 import com.mmatthews.process.ui.components.IntensitySlider
 import com.mmatthews.process.ui.components.PrimaryButton
@@ -74,7 +73,6 @@ fun DoneScreen(onFinished: () -> Unit) {
                 textAlign = TextAlign.Center,
             )
         }
-        CrisisFooter()
     }
 }
 

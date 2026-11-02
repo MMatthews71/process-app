@@ -76,12 +76,7 @@ class RulesTest {
     }
 
     @Test
-    fun promptsUseNameWhenSet() {
-        assertEquals(
-            "Max, which part of this story might be true, and which part is overstated?",
-            Prompts.truer("Max"),
-        )
-        assertEquals("What would you tell a friend who did this?", Prompts.friend(""))
+    fun intensityPromptUsesTheChosenWord() {
         assertEquals("How strong is the humiliated right now?", Prompts.intensity("humiliated", "Ashamed"))
         assertEquals("How strong is the ashamed right now?", Prompts.intensity(null, "Ashamed"))
         assertEquals("How strong is it right now?", Prompts.intensity(null, null))
@@ -115,5 +110,6 @@ class RulesTest {
         assertEquals(listOf("Anxious", "Ashamed", "Sad", "Angry", "Lonely", "Guilty"), Defaults.feelings.keys.toList())
         assertEquals(listOf("regretful", "remorseful"), Defaults.feelings["Guilty"])
         assertEquals(6, Defaults.storyChips.size)
+        assertEquals(listOf("Call family", "Step into sunlight", "Stretch 2 min"), Defaults.helpers)
     }
 }

@@ -1,11 +1,9 @@
 package com.mmatthews.process.ui.platform
 
 import android.Manifest
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -28,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import com.mmatthews.process.ui.components.Dialer
 import com.mmatthews.process.ui.components.Haptics
 import com.mmatthews.process.ui.components.VoiceInput
 
@@ -161,17 +158,5 @@ class AndroidHaptics(context: Context) : Haptics {
         if (!v.hasVibrator()) return
         val amplitude = if (v.hasAmplitudeControl()) (if (strong) 200 else 70) else VibrationEffect.DEFAULT_AMPLITUDE
         v.vibrate(VibrationEffect.createOneShot(millis, amplitude))
-    }
-}
-
-class AndroidDialer(private val context: Context) : Dialer {
-    override fun dial(number: String) {
-        val digits = number.filter { it.isDigit() || it == '+' }
-        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$digits")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        try {
-            context.startActivity(intent)
-        } catch (_: ActivityNotFoundException) {
-            Toast.makeText(context, "No phone app found. Number: $number", Toast.LENGTH_LONG).show()
-        }
     }
 }

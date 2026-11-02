@@ -1,6 +1,5 @@
 package com.mmatthews.process.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -34,17 +33,12 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mmatthews.process.domain.TextRules
 import kotlin.math.roundToInt
 
-/**
- * Standard screen: back + skip on top, scrolling content, actions at the bottom,
- * crisis footer last.
- */
+/** Standard screen: back + skip on top, scrolling content, actions at the bottom. */
 @Composable
 fun FlowScaffold(
     onBack: (() -> Unit)?,
@@ -76,11 +70,10 @@ fun FlowScaffold(
             content = content,
         )
         Column(
-            Modifier.fillMaxWidth().padding(top = 12.dp),
+            Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
             content = bottom,
         )
-        CrisisFooter()
     }
 }
 
@@ -203,44 +196,5 @@ fun VoiceTextField(
                 }
             },
         )
-    }
-}
-
-/** "Struggling? Lifeline 13 11 14 · Canada 988" – each number dials. */
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-fun CrisisFooter(modifier: Modifier = Modifier) {
-    val lines = LocalCrisisLines.current
-    val dialer = LocalDialer.current
-    val style = MaterialTheme.typography.bodyMedium
-    FlowRow(
-        modifier.fillMaxWidth().padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.Center,
-    ) {
-        Text(
-            "Struggling?",
-            style = style,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(horizontal = 4.dp, vertical = 12.dp),
-        )
-        lines.forEachIndexed { i, line ->
-            if (i > 0) {
-                Text(
-                    "·",
-                    style = style,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 12.dp),
-                )
-            }
-            Text(
-                "${line.label} ${line.number}",
-                style = style,
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .clickable(role = Role.Button, onClickLabel = "Call ${line.label}") { dialer.dial(line.number) }
-                    .padding(horizontal = 6.dp, vertical = 12.dp),
-            )
-        }
     }
 }

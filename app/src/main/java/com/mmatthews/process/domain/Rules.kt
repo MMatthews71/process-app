@@ -29,17 +29,14 @@ object TextRules {
 }
 
 object Prompts {
-    fun withName(name: String, rest: String): String =
-        if (name.isBlank()) rest.replaceFirstChar { it.uppercaseChar() } else "${name.trim()}, $rest"
-
     fun intensity(precise: String?, broad: String?): String {
         val word = precise ?: broad?.lowercase()
         return if (word == null) "How strong is it right now?" else "How strong is the $word right now?"
     }
 
-    fun truer(name: String) = withName(name, "which part of this story might be true, and which part is overstated?")
+    const val TRUER = "Which part of this story might be true, and which part is overstated?"
 
-    fun friend(name: String) = withName(name, "what would you tell a friend who did this?")
+    const val FRIEND = "What would you tell a friend who did this?"
 }
 
 object PredictionRules {

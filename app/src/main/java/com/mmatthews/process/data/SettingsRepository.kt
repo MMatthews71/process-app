@@ -29,7 +29,6 @@ class SettingsRepository @Inject constructor(private val store: DataStore<Prefer
 
     private object Keys {
         val ONBOARDED = booleanPreferencesKey("onboarded")
-        val NAME = stringPreferencesKey("name")
         val BREATH_CYCLES = intPreferencesKey("breath_cycles")
         val FEELINGS = stringPreferencesKey("feelings_json")
         val CUSTOM_CHIPS = stringPreferencesKey("custom_chips_json")
@@ -48,7 +47,6 @@ class SettingsRepository @Inject constructor(private val store: DataStore<Prefer
     val settings: Flow<AppSettings> = prefs.map { p ->
         AppSettings(
             onboarded = p[Keys.ONBOARDED] ?: false,
-            name = p[Keys.NAME].orEmpty(),
             breathCycles = p[Keys.BREATH_CYCLES] ?: Defaults.BREATH_CYCLES,
             feelings = decode<Map<String, List<String>>>(p[Keys.FEELINGS]) ?: Defaults.feelings,
             customChips = decode<List<String>>(p[Keys.CUSTOM_CHIPS]) ?: emptyList(),
@@ -65,11 +63,8 @@ class SettingsRepository @Inject constructor(private val store: DataStore<Prefer
     private inline fun <reified T> decode(raw: String?): T? =
         raw?.let { runCatching { json.decodeFromString<T>(it) }.getOrNull() }
 
-    suspend fun completeOnboarding(name: String) {
-        store.edit {
-            it[Keys.NAME] = name.trim()
-            it[Keys.ONBOARDED] = true
-        }
+    suspend fun completeOnboarding() {
+        store.edit { it[Keys.ONBOARDED] = true }
     }
 
     suspend fun setLastReframeTab(tab: ReframeType) {

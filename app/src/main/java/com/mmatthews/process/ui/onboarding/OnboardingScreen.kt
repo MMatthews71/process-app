@@ -5,32 +5,20 @@ import com.mmatthews.process.ui.components.FlowScaffold
 import com.mmatthews.process.ui.components.PrimaryButton
 import com.mmatthews.process.ui.components.Prompt
 import com.mmatthews.process.ui.components.SecondaryButton
-import com.mmatthews.process.ui.components.VoiceTextField
 
-enum class OnboardingPage { NAME, ABOUT, NOTIFICATIONS }
+enum class OnboardingPage { ABOUT, NOTIFICATIONS }
 
 @Composable
 fun OnboardingScreen(
     page: OnboardingPage,
-    name: String,
-    onName: (String) -> Unit,
     onNext: () -> Unit,
-    onBack: (() -> Unit)?,
+    onBack: () -> Unit,
     onAllowNotifications: () -> Unit,
     onSkipNotifications: () -> Unit,
 ) {
     when (page) {
-        OnboardingPage.NAME -> FlowScaffold(
-            onBack = null,
-            onSkip = null,
-            bottom = { PrimaryButton("Next", onNext, enabled = name.isNotBlank()) },
-        ) {
-            Prompt("What's your first name?")
-            VoiceTextField(name, onName, testTag = "name", singleLine = true)
-        }
-
         OnboardingPage.ABOUT -> FlowScaffold(
-            onBack = onBack,
+            onBack = null,
             onSkip = null,
             bottom = { PrimaryButton("Got it", onNext) },
         ) {

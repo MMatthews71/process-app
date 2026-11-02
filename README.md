@@ -23,8 +23,8 @@ Name the feeling, settle the body, check the story, pick one next step, then get
 
 What works in step 1:
 
-- **Onboarding** (once): first name → "Use this after something happens…" → notification permission (Android 13+).
-- **Home**: "Process it", "Good thing", and the crisis footer. The Lessons, Therapy and Settings icons
+- **Onboarding** (once): "Use this after something happens…" → notification permission (Android 13+).
+- **Home**: "Process it" and "Good thing". The Lessons, Therapy and Settings icons
   are shown but disabled until their steps are built.
 - **Launcher shortcut** (long-press the app icon → "Process it") and a **Quick Settings tile**
   ("Process it"). Both open straight into the flow.
@@ -45,8 +45,6 @@ What works in step 1:
 - **Voice**: every text field has a mic button. It uses the on-device recognizer on Android 12+ when
   available, otherwise the phone's standard recognizer. The microphone permission is only requested
   on the first mic tap.
-- **Crisis footer** on every screen: "Struggling? Lifeline 13 11 14 · Canada 988". Tapping a number
-  opens the dialer with it filled in. Nothing is dialled automatically.
 
 ## Build and install on your phone
 
@@ -105,12 +103,10 @@ There's no Settings screen until step 6. Until then these defaults apply:
 
 | Setting | Default | What it does |
 |---|---|---|
-| Name | from onboarding | Used in prompts ("Max, which part of this story…") |
 | Breath cycles | 5 | Cyclic sighs before "Keep going / Next" |
 | Feeling lists | spec lists | Broad feelings and their precise words on screen 1 |
 | Story chips | 6 defaults | Custom chips can be added in step 6 |
-| Helpers | Walk 5 min without music, Call family, Step into sunlight, Stretch 2 min | One is suggested at the end of each session, never the same one twice in a row when there's a choice |
-| Crisis numbers | Lifeline 13 11 14, Canada 988 | Footer on every screen; tap to dial |
+| Helpers | Call family, Step into sunlight, Stretch 2 min | One is suggested at the end of each session, never the same one twice in a row when there's a choice |
 | Worry slot | off | When on, "Let it go" adds "It can wait for Sunday's slot." |
 
 The rest of the settings (morning check time, evening check, daily practice, export, biometric lock,
@@ -126,8 +122,8 @@ app/src/main/java/com/mmatthews/process/
   di/           Hilt modules
   ui/process/   The four screens + ending, ProcessViewModel
   ui/home, ui/onboarding, ui/good
-  ui/components Shared UI: scaffold with crisis footer, voice text field, buttons, slider
-  ui/platform   Android-only bits: SpeechRecognizer, vibration, dialer
+  ui/components Shared UI: screen scaffold, voice text field, buttons, slider
+  ui/platform   Android-only bits: SpeechRecognizer, vibration
   tile/         Quick Settings tile
 ```
 

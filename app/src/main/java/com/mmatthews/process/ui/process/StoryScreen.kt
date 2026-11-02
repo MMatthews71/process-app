@@ -57,7 +57,7 @@ fun StoryScreen(ui: ProcessUi, a: ProcessActions) {
                 )
             }
             if (!friend) {
-                Prompt(Prompts.truer(ui.settings.name))
+                Prompt(Prompts.TRUER)
                 ui.lastCue?.let { cue ->
                     Text(
                         "Last time you wrote: $cue",
@@ -88,7 +88,7 @@ fun StoryScreen(ui: ProcessUi, a: ProcessActions) {
                     minLines = 1,
                 )
             } else {
-                Prompt(Prompts.friend(ui.settings.name))
+                Prompt(Prompts.FRIEND)
                 VoiceTextField(d.friendText, a::setFriendText, testTag = "friendText", minLines = 3)
             }
         }

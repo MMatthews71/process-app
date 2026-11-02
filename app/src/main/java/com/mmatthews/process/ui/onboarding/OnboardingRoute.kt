@@ -20,9 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(private val settings: SettingsRepository) : ViewModel() {
-    fun finish(name: String, then: () -> Unit) {
+    fun finish(then: () -> Unit) {
         viewModelScope.launch {
-            settings.completeOnboarding(name)
+            settings.completeOnboarding()
             then()
         }
     }
@@ -30,28 +30,17 @@ class OnboardingViewModel @Inject constructor(private val settings: SettingsRepo
 
 @Composable
 fun OnboardingRoute(onDone: () -> Unit, vm: OnboardingViewModel = hiltViewModel()) {
-    var page by rememberSaveable { mutableStateOf(OnboardingPage.NAME) }
-    var name by rememberSaveable { mutableStateOf("") }
+    var page by rememberSaveable { mutableStateOf(OnboardingPage.ABOUT) }
     val askNotifications = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-    val finish = { vm.finish(name, onDone) }
+    val finish = { vm.finish(onDone) }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { finish() }
 
-    BackHandler(enabled = page != OnboardingPage.NAME) {
-        page = OnboardingPage.entries[page.ordinal - 1]
-    }
+    BackHandler(enabled = page == OnboardingPage.NOTIFICATIONS) { page = OnboardingPage.ABOUT }
 
     OnboardingScreen(
         page = page,
-        name = name,
-        onName = { name = it },
-        onNext = {
-            when (page) {
-                OnboardingPage.NAME -> page = OnboardingPage.ABOUT
-                OnboardingPage.ABOUT -> if (askNotifications) page = OnboardingPage.NOTIFICATIONS else finish()
-                OnboardingPage.NOTIFICATIONS -> finish()
-            }
-        },
-        onBack = { page = OnboardingPage.entries[(page.ordinal - 1).coerceAtLeast(0)] },
+        onNext = { if (askNotifications) page = OnboardingPage.NOTIFICATIONS else finish() },
+        onBack = { page = OnboardingPage.ABOUT },
         onAllowNotifications = {
             if (askNotifications) launcher.launch(Manifest.permission.POST_NOTIFICATIONS) else finish()
         },

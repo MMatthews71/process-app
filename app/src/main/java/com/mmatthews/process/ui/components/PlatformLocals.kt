@@ -1,9 +1,6 @@
 package com.mmatthews.process.ui.components
 
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.mmatthews.process.domain.CrisisLine
-import com.mmatthews.process.domain.Defaults
 
 /** Speech-to-text. [activeKey] is the field currently listening, if any (snapshot state). */
 interface VoiceInput {
@@ -22,11 +19,5 @@ fun interface Haptics {
     fun pulse(millis: Long, strong: Boolean)
 }
 
-fun interface Dialer {
-    fun dial(number: String)
-}
-
 val LocalVoiceInput = staticCompositionLocalOf<VoiceInput> { NoVoiceInput }
 val LocalHaptics = staticCompositionLocalOf { Haptics { _, _ -> } }
-val LocalDialer = staticCompositionLocalOf { Dialer { } }
-val LocalCrisisLines = compositionLocalOf { Defaults.crisisLines }

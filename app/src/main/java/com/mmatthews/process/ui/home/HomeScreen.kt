@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.mmatthews.process.domain.PredictionOutcome
 import com.mmatthews.process.ui.components.AppIcons
 import com.mmatthews.process.ui.components.ChoiceButton
-import com.mmatthews.process.ui.components.CrisisFooter
 import com.mmatthews.process.ui.components.PrimaryButton
 import com.mmatthews.process.ui.components.VoiceTextField
 
@@ -79,7 +78,6 @@ fun HomeScreen(
             }
             Spacer(Modifier.weight(1f))
         }
-        CrisisFooter()
     }
 }
 

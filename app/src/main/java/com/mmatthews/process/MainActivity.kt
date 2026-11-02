@@ -16,11 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mmatthews.process.ui.components.LocalCrisisLines
-import com.mmatthews.process.ui.components.LocalDialer
 import com.mmatthews.process.ui.components.LocalHaptics
 import com.mmatthews.process.ui.components.LocalVoiceInput
-import com.mmatthews.process.ui.platform.AndroidDialer
 import com.mmatthews.process.ui.platform.AndroidHaptics
 import com.mmatthews.process.ui.platform.rememberAndroidVoiceInput
 import com.mmatthews.process.ui.theme.ProcessTheme
@@ -38,16 +35,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProcessTheme {
                 val start by vm.startRoute.collectAsStateWithLifecycle()
-                val lines by vm.crisisLines.collectAsStateWithLifecycle()
                 val context = LocalContext.current
                 val haptics = remember { AndroidHaptics(context) }
-                val dialer = remember { AndroidDialer(context) }
                 val voice = rememberAndroidVoiceInput()
                 CompositionLocalProvider(
                     LocalVoiceInput provides voice,
                     LocalHaptics provides haptics,
-                    LocalDialer provides dialer,
-                    LocalCrisisLines provides lines,
                 ) {
                     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                         Box(Modifier.fillMaxSize().safeDrawingPadding()) {

@@ -23,7 +23,6 @@ data class CrisisLine(val label: String, val number: String)
 /** Everything the UI needs from DataStore, as plain values. */
 data class AppSettings(
     val onboarded: Boolean = false,
-    val name: String = "",
     val breathCycles: Int = Defaults.BREATH_CYCLES,
     val feelings: Map<String, List<String>> = Defaults.feelings,
     val customChips: List<String> = emptyList(),

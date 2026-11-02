@@ -43,7 +43,7 @@ class ProcessFlowTest {
         hilt.inject()
         runBlocking {
             settings.clearDraft()
-            settings.completeOnboarding("Max")
+            settings.completeOnboarding()
             settings.setLastReframeTab(ReframeType.TRUER)
         }
     }
@@ -79,7 +79,7 @@ class ProcessFlowTest {
             compose.onNodeWithText("Next").performClick()
             waitForText("What's the story?")
             compose.onNodeWithText("They don't like me").performScrollTo().performClick()
-            waitForText("Max, which part of this story might be true")
+            waitForText("Which part of this story might be true")
             compose.onNodeWithTag("newFact").performTextInput("Sam asked me to lunch")
             compose.onNodeWithText("Next").performClick()
 
