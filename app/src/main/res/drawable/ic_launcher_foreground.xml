@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A breathing circle: outer ring and a smaller filled centre. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M54,31a23,23 0,1 1,0 46a23,23 0,1 1,0 -46z"
+        android:strokeWidth="5"
+        android:strokeColor="#FFCDEAE1" />
+    <path
+        android:fillColor="#FF8FC9BA"
+        android:pathData="M54,44a10,10 0,1 1,0 20a10,10 0,1 1,0 -20z" />
+</vector>
