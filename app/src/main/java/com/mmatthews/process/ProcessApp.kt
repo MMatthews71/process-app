@@ -1,7 +1,9 @@
 package com.mmatthews.process
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import com.mmatthews.process.data.AppDatabase
+import com.mmatthews.process.data.EntryStore
 
-@HiltAndroidApp
-class ProcessApp : Application()
+class ProcessApp : Application() {
+    val store: EntryStore by lazy { EntryStore(AppDatabase.create(this).entryDao()) }
+}
